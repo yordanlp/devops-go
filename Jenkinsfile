@@ -9,6 +9,7 @@ pipeline {
         stage('build') {
             steps {
                 sh 'go build main.go'
+                archiveArtifacts artifacts: 'main', followSymlinks: false
             }
         }
     }
