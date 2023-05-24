@@ -13,7 +13,7 @@ func TestSimpleFactory_ok(t *testing.T) {
 func TestSimpleFactory_fail(t *testing.T) {
 	f := SimpleFactory("http://localhost")
 
-	if f.Name != "World" {
-		t.Errorf("feature incorrect, got %s, want: %s ", f.Name, "World")
+	if f.Description != "World" {
+		t.Errorf("feature incorrect, got %s, want: %s ", f.Description, "World")
 	}
 }
