@@ -12,5 +12,11 @@ pipeline {
                 archiveArtifacts artifacts: 'main', followSymlinks: false
             }
         }
+
+        stage('test') {
+            steps {
+                sh 'go test .'
+            }
+        }
     }
 }
