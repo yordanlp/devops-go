@@ -6,16 +6,16 @@ pipeline {
     }
 
     stages {
+        stage('test') {
+            steps {
+                sh 'go test .'
+            }
+        }
+        
         stage('build') {
             steps {
                 sh 'go build main.go'
                 archiveArtifacts artifacts: 'main', followSymlinks: false
-            }
-        }
-
-        stage('test') {
-            steps {
-                sh 'go test .'
             }
         }
     }
