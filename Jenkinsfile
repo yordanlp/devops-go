@@ -18,5 +18,14 @@ pipeline {
                 archiveArtifacts artifacts: 'main', followSymlinks: false
             }
         }
+
+        stage('deploy'){
+            steps{
+                withCredentials([sshUserPrivateKey(credentialsId: 'target-ssh-credentials', keyFileVariable: 'keyFile', usernameVariable: 'userName')]) {
+                    sh "ssh-keyscan 192.168.105.3 > ~/.ssh/known_hosts"
+                    sh "scp -i ${keyFile} main ${userName}@192.168.105.3:"
+                }
+            }
+        }
     }
 }
