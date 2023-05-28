@@ -26,6 +26,9 @@ pipeline {
                     sh "scp -i ${keyFile} main ${userName}@192.168.105.3:"
                     sh "scp -i ${keyFile} myapp.service ${userName}@192.168.105.3:"
                     sh "ssh -l ${userName} -i ${keyFile} 192.168.105.3 -C sudo mv myapp.service /etc/systemd/system"
+                    sh "ssh -l ${userName} -i ${keyFile} 192.168.105.3 -C sudo systemctl daemon-reload"
+                    sh "ssh -l ${userName} -i ${keyFile} 192.168.105.3 -C sudo systemctl enable myapp"
+                    sh "ssh -l ${userName} -i ${keyFile} 192.168.105.3 -C sudo systemctl start myapp"
                 }
             }
         }
