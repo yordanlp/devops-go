@@ -1,0 +1,11 @@
+[Unit]
+Description=My go application
+After=network.target
+
+[Service]
+ExecStart=/home/vagrant/main
+Restart=always
+Type=simple
+
+[Install]
+WantedBy=default.target
