@@ -26,16 +26,20 @@ pipeline {
             }
         }
 
-        stage('deploy to k8s cluster'){
+        stage('deploy to staging'){
             steps{
                 withCredentials([sshUserPrivateKey(credentialsId: 'target-ssh-credentials', keyFileVariable: 'keyFile', usernameVariable: 'userName')]) {
-                    sh "ssh-keyscan 192.168.105.4 > ~/.ssh/known_hosts"
-                    
-                    sh "ssh -l ${userName} -i ${keyFile} 192.168.105.4 -C kubectl delete --ignore-not-found=true deployment yordan-go-app-deployment"
-                    sh "ssh -l ${userName} -i ${keyFile} 192.168.105.4 -C kubectl create deployment yordan-go-app-deployment --image=ttl.sh/yordan-main-go:1h --port 5555"
-                    sh "ssh -l ${userName} -i ${keyFile} 192.168.105.4 -C kubectl scale --replicas=2 deployment yordan-go-app-deployment"
-                    
+                    sh "ssh-keyscan 192.168.105.3 > ~/.ssh/known_hosts"
+                    sh "ssh -l ${userName} -i ${keyFile} 192.168.105.3 -C docker pull ttl.sh/yordan-main-go:1h"
+                    sh "ssh -l ${userName} -i ${keyFile} 192.168.105.3 -C docker rm --force yordan-main-go:1h"
+                    sh "ssh -l ${userName} -i ${keyFile} 192.168.105.3 -C docker run --detach --publish 5000:5000 --name yordan-main-go:1h ttl.sh/yordan-main-go:1h"
                 }
+            }
+        }
+
+        stage('deploy to aws ec2 instance'){
+            steps{
+                /*TODO*/
             }
         }
 
