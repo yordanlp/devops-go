@@ -3,7 +3,7 @@ Description=My go application
 After=network.target
 
 [Service]
-ExecStart=/home/vagrant/main
+ExecStart=/home/ubuntu/main
 Restart=always
 Type=simple
 
