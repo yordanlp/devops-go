@@ -26,7 +26,7 @@ func handler(w http.ResponseWriter, r *http.Request) {
 }
 
 func main() {
-	fmt.Println("Server started on port 4444")
+	fmt.Println("Server started on port 5555")
 	http.HandleFunc("/api", handler)
-	log.Fatal(http.ListenAndServe(":4444", nil))
+	log.Fatal(http.ListenAndServe(":5555", nil))
 }
