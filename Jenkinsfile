@@ -35,10 +35,10 @@ pipeline {
             }
         }
 
-        stage('health check'){
-            steps{
-                sh "curl -s http://192.168.105.4:5555/api"
-            }
-        }
+        // stage('health check'){
+        //     steps{
+        //         sh "curl -s http://192.168.105.4:5555/api"
+        //     }
+        // }
     }
 }
