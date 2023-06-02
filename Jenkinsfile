@@ -31,8 +31,8 @@ pipeline {
                 withCredentials([sshUserPrivateKey(credentialsId: 'target-ssh-credentials', keyFileVariable: 'keyFile', usernameVariable: 'userName')]) {
                     sh "ssh-keyscan 192.168.105.3 > ~/.ssh/known_hosts"
                     sh "ssh -l ${userName} -i ${keyFile} 192.168.105.3 -C docker pull ttl.sh/yordan-main-go:1h"
-                    sh "ssh -l ${userName} -i ${keyFile} 192.168.105.3 -C docker rm --force yordan-main-go:1h"
-                    sh "ssh -l ${userName} -i ${keyFile} 192.168.105.3 -C docker run --detach --publish 5000:5000 --name yordan-main-go:1h ttl.sh/yordan-main-go:1h"
+                    sh "ssh -l ${userName} -i ${keyFile} 192.168.105.3 -C docker rm --force yordan-main-go"
+                    sh "ssh -l ${userName} -i ${keyFile} 192.168.105.3 -C docker run --detach --publish 5000:5000 --name yordan-main-go ttl.sh/yordan-main-go:1h"
                 }
             }
         }
