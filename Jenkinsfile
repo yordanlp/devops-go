@@ -30,8 +30,11 @@ pipeline {
             steps{
                 withCredentials([sshUserPrivateKey(credentialsId: 'target-ssh-credentials', keyFileVariable: 'keyFile', usernameVariable: 'userName')]) {
                     sh "ssh-keyscan 192.168.105.4 > ~/.ssh/known_hosts"
-                    sh "ssh -l ${userName} -i ${keyFile} 192.168.105.4 -C kubectl delete pod yordan-go-app"
-                    sh "ssh -l ${userName} -i ${keyFile} 192.168.105.4 -C kubectl run --image ttl.sh/yordan-main-go:1h yordan-go-app"
+                    
+                    sh "ssh -l ${userName} -i ${keyFile} 192.168.105.4 -C kubectl delete deployment yordan-go-app-deployment"
+                    sh "ssh -l ${userName} -i ${keyFile} 192.168.105.4 -C kubectl create deployment yordan-go-app-deployment --image=ttl.sh/yordan-main-go:1h --port 5555"
+                    sh "ssh -l ${userName} -i ${keyFile} 192.168.105.4 -C kubectl scale --replicas=2 deployment yordan-go-app-deployment"
+                    
                 }
             }
         }
