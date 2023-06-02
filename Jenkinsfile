@@ -37,11 +37,11 @@ pipeline {
             }
         }
 
-        stage('deploy to aws ec2 instance'){
-            steps{
-                /*TODO*/
-            }
-        }
+        // stage('deploy to aws ec2 instance'){
+        //     steps{
+        //         /*TODO*/
+        //     }
+        // }
 
         // stage('health check'){
         //     steps{
