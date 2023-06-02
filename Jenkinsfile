@@ -42,7 +42,7 @@ pipeline {
                 withCredentials([sshUserPrivateKey(credentialsId: 'target-ssh-credentials', keyFileVariable: 'keyFile', usernameVariable: 'userName')]) {
                     sh "ssh-keyscan 13.48.149.77 > ~/.ssh/known_hosts"
 
-                    // sh "ssh -l ubuntu -i ${keyFile} 13.48.149.77 -C sudo systemctl is-active --quiet myapp && sudo systemctl stop myapp"
+                    sh "ssh -l ubuntu -i ${keyFile} 13.48.149.77 -C sudo systemctl stop myapp"
                     sh "scp -i ${keyFile} main ubuntu@13.48.149.77:"
                     sh "scp -i ${keyFile} myapp.service ubuntu@13.48.149.77:"
                     sh "ssh -l ubuntu -i ${keyFile} 13.48.149.77 -C sudo mv myapp.service /etc/systemd/system"
