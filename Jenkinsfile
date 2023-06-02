@@ -22,7 +22,7 @@ pipeline {
         stage('build and push docker image'){
             steps{
                 sh 'docker build . --tag ttl.sh/yordan-main-go:1h'
-                sh 'docker push ttl.sh/yordan-main.go:1h'
+                sh 'docker push ttl.sh/yordan-main-go:1h'
             }
         }
     }
